@@ -1,0 +1,54 @@
+# This file goes in your home directory and is run every time LLDB starts.
+# Importing the script below will make the 'ql' and 'qlf' available to you in LLDB.
+# IMPORTANT: Update the path to the script depending on where you decide place it.
+
+command script import ~/Library/lldbScripts/lldb_quick_look.py
+command alias ql quicklook
+command script import ~/Developer/chisel/fblldb.py
+
+# Get a recursive description of the view hierarchy starting from the app’s key window.
+command regex rd 's/^[[:space:]]*$/po [[[UIApplication sharedApplication] keyWindow] recursiveDescription]/' 's/^(.+)$/po [%1 recursiveDescription]/'
+
+# Get a recursive description of the view hierarchy starting from the app’s key window (macOS).
+command regex rdx 's/^[[:space:]]*$/po [[[[NSApp windows] firstObject] contentView] _subtreeDescription]/' 's/^(.+)$/po [%1 _subtreeDescription]/'
+
+# Print the view controller hierarchy.
+command regex ph 's/^[[:space:]]*$/po [UIViewController _printHierarchy]/' 's/^(.+)$/po [%1 _printHierarchy]/'
+
+# Print the instance var description of an object.
+command regex pd 's/^(.+)$/po [%1 _ivarDescription]/'
+
+# Import UIKit, Cocoa, and Foundation.
+expr @import UIKit
+expr @import Cocoa
+expr @import Foundation
+command alias uikit expr @import UIKit
+command alias cocoa expr @import Cocoa
+command alias foundation expr @import Foundation
+
+# break on function/method/selector: b -n name
+# break on C/C++ method: b -M method
+# break on selector: b -S selector:here:
+# break on address: b -a 0xfeedface
+
+# Break on objc_exception_throw.
+#breakpoint set --name objc_exception_throw
+
+# Use `where` to print information on current frame.
+command alias where frame select --relative=0
+
+# `?` shortcut for `help`.
+command alias ? help
+
+# `poo` shortcut for `po`.
+command alias poo po
+
+# `poc` shortcut for evaluating something in Objective-C frame (useful when debugging Swift).
+command alias poc expression -l objc -O --
+
+# `flush` shortcut for forcing CA to update while paused in the debugger.
+command alias flush expression -l objc -- [CATransaction flush]
+
+# `json` shortcut for pretty-printing JSON. Takes in `Data` or a JSON object (dictionary or array)
+# Source: https://soffes.blog/debugging-json-data-in-lldb
+command regex json 's/(.+)/expr let input = %1; print(String(data: try! JSONSerialization.data(withJSONObject: (input is Data ? (try! JSONSerialization.jsonObject(with: input as! Data, options: [])) : input as! Any), options: [.prettyPrinted]), encoding: .utf8)!)/'

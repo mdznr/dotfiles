@@ -1,0 +1,86 @@
+
+# - Configuration
+
+config defaultToCurrentScreen true
+config nudgePercentOf screenSize
+config resizePercentOf screenSize
+config modalEscapeKey esc
+config gridBackgroundColor 75;77;81;1.0
+config gridRoundedCornerSize 2
+config gridCellBackgroundColor 100;106;116;0.8
+config gridCellSelectedColor 50;53;58;0.8
+config gridCellRoundedCornerSize 2
+
+# - Aliases
+
+alias GLOBAL_MODE ctrl,alt,cmd,space
+
+alias SCREEN_CENTER_X (screenOriginX+(screenSizeX/2))
+alias SCREEN_CENTER_Y (screenOriginY+(screenSizeY/2))
+alias SCREEN_CENTER ${SCREEN_CENTER_X};${SCREEN_CENTER_Y}
+alias CENTER_WINDOW ${SCREEN_CENTER_X}-(newWindowSizeX/2);${SCREEN_CENTER_Y}-(newWindowSizeY/2)
+
+alias GOLDEN_RATIO (1.618033988749894848204586834365638117720309179805762862135)
+alias GOLDEN_RATIO_INV (1/${GOLDEN_RATIO})
+
+alias SCREEN_GOLDEN_RATIO_WIDTH (floor(screenSizeX*${GOLDEN_RATIO_INV}))
+alias SCREEN_GOLDEN_RATIO_X (screenOriginX+${SCREEN_GOLDEN_RATIO_WIDTH})
+alias SCREEN_GOLDEN_RATIO_HEIGHT (floor(screenSizeY*${GOLDEN_RATIO_INV}))
+alias SCREEN_GOLDEN_RATIO_Y (screenOriginY+${SCREEN_GOLDEN_RATIO_HEIGHT})
+
+# - Modal Single-Key Generic Window Sizes/Positions
+
+bind a:${GLOBAL_MODE} move screenOriginX;screenOriginY ${SCREEN_GOLDEN_RATIO_WIDTH};screenSizeY # A little bit more than the left half of the display
+bind b:${GLOBAL_MODE} grid
+bind c:${GLOBAL_MODE} grid
+bind d:${GLOBAL_MODE} grid
+bind e:${GLOBAL_MODE} grid
+bind f:${GLOBAL_MODE} move ${CENTER_WINDOW} (screenSizeX*${GOLDEN_RATIO_INV});(screenSizeY*${GOLDEN_RATIO_INV}) # Centered, Golden ratio to screen size in both dimensions
+bind g:${GLOBAL_MODE} move ${CENTER_WINDOW} 1024;768 # Centered, 1024x768
+bind h:${GLOBAL_MODE} move ${CENTER_WINDOW} (2304/2);(1440/2) # Centered, 12-inch MacBook
+bind i:${GLOBAL_MODE} grid
+bind j:${GLOBAL_MODE} grid
+bind k:${GLOBAL_MODE} grid
+bind l:${GLOBAL_MODE} move ${SCREEN_GOLDEN_RATIO_X};${SCREEN_GOLDEN_RATIO_Y} (screenSizeX-${SCREEN_GOLDEN_RATIO_X});(screenSizeY-${SCREEN_GOLDEN_RATIO_HEIGHT}) # Bottom Right
+bind m:${GLOBAL_MODE} grid
+bind n:${GLOBAL_MODE} grid
+bind o:${GLOBAL_MODE} grid
+bind p:${GLOBAL_MODE} move ${SCREEN_GOLDEN_RATIO_X};screenOriginY (screenSizeX-${SCREEN_GOLDEN_RATIO_X});${SCREEN_GOLDEN_RATIO_HEIGHT} # Top Right
+bind q:${GLOBAL_MODE} grid
+bind r:${GLOBAL_MODE} grid
+bind s:${GLOBAL_MODE} grid
+bind t:${GLOBAL_MODE} grid
+bind u:${GLOBAL_MODE} grid
+bind v:${GLOBAL_MODE} grid
+bind w:${GLOBAL_MODE} grid
+bind x:${GLOBAL_MODE} move screenOriginX;screenOriginY screenSizeX;screenSizeY # Full-Screen
+bind y:${GLOBAL_MODE} grid
+bind z:${GLOBAL_MODE} move screenOriginX;screenOriginY min({(screenSizeX-128),(screenSizeX*(18.0/20.0))});screenSizeY # Mostly Full-Screen with a little peaking out from the right
+bind 0:${GLOBAL_MODE} grid
+bind 1:${GLOBAL_MODE} grid
+bind 2:${GLOBAL_MODE} grid
+bind 3:${GLOBAL_MODE} grid
+bind 4:${GLOBAL_MODE} grid
+bind 5:${GLOBAL_MODE} grid
+bind 6:${GLOBAL_MODE} grid
+bind 7:${GLOBAL_MODE} grid
+bind 8:${GLOBAL_MODE} grid
+bind 9:${GLOBAL_MODE} grid
+bind `:${GLOBAL_MODE} grid
+bind -:${GLOBAL_MODE} grid
+bind =:${GLOBAL_MODE} grid
+bind [:${GLOBAL_MODE} grid
+bind ]:${GLOBAL_MODE} grid
+bind ;:${GLOBAL_MODE} grid
+bind ':${GLOBAL_MODE} grid
+bind ,:${GLOBAL_MODE} grid
+bind .:${GLOBAL_MODE} grid
+bind /:${GLOBAL_MODE} grid
+bind space:${GLOBAL_MODE} grid padding:8 1680x1050:16,9 1050x1680:9,16 # Grid
+bind tab:${GLOBAL_MODE} throw right resize # Throw to next screen (to the right) and resize to fit, if necessary
+bind tab:shift,${GLOBAL_MODE} throw left resize # Throw to previous screen (to the left) and resize to fit, if necessary
+bind up:${GLOBAL_MODE} move screenOriginX;screenOriginY screenSizeX;(screenSizeY/2) # Top Half
+bind right:${GLOBAL_MODE} move screenOriginX+(screenSizeX/2);screenOriginY (screenSizeX/2);screenSizeY # Right Half
+bind down:${GLOBAL_MODE} move screenOriginX;screenOriginY+(screenSizeY/2) screenSizeX;(screenSizeY/2) # Bottom Half
+bind left:${GLOBAL_MODE} move screenOriginX;screenOriginY (screenSizeX/2);screenSizeY # Left Half
+

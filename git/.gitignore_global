@@ -1,0 +1,21 @@
+# OS X
+
+## DS_Store
+*.DS_Store
+
+
+# Scratch files
+
+## diffs
+*.diff
+*.path
+
+# tags
+tags
+
+# vim
+
+## undo files
+*.un~
+## netrwhistory
+*.netrwhist
