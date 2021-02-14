@@ -1,6 +1,5 @@
 # ~/bin is where personal executables are stored.
 set PATH $PATH (find -L ~/bin -type d)
-set PATH $PATH (find /opt/homebrew/bin)
 
 # /usr/local/bin is where brew installs stuff.
 set PATH /usr/local/bin $PATH;
