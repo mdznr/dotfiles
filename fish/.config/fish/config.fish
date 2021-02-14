@@ -6,6 +6,8 @@ set PATH /usr/local/bin $PATH;
 
 set -g -x JAVA_HOME /Library/Java/JavaVirtualMachines/jdk1.8.0_20.jdk/Contents/Home
 
+set -g -x FZF_DEFAULT_OPTS '--height 40% --layout=reverse --border'
+
 # Add Node Modules to path.
 #set PATH $PATH ~/node_modules/.bin
 

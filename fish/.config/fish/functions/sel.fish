@@ -8,7 +8,7 @@ function sel
 	end
 
 	while true 
-		set -l selected_subdirectory (ls -lahu $selected_directory | skip 1 | fzf --reverse --height 35% --nth 9 | awk '{print $9}')
+		set -l selected_subdirectory (ls -lahu $selected_directory | skip 1 | fzf --nth 9 | awk '{print $9}')
 
 		# If the user didn’t select anything, they quit the command. Exit without doing anything.
 		if [ "$selected_subdirectory" = "" ]

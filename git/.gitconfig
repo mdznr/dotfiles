@@ -44,7 +44,7 @@
 	ch = checkout
 	check = checkout
 
-	cor = !git for-each-ref --sort=-committerdate --format='%(refname:short) (%(committerdate:relative))' refs/heads | fzf --reverse --height 35% --nth 1 | awk '{print $1}' | xargs git checkout
+	cor = !git for-each-ref --sort=-committerdate --format='%(refname:short) (%(committerdate:relative))' refs/heads | fzf --nth 1 | awk '{print $1}' | xargs git checkout
 
 	ci = commit
 	com = commit
