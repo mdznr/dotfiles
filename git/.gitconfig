@@ -62,7 +62,7 @@
 	# Prints the name of the current branch
 	branch-name = "!f() { git symbolic-ref HEAD | sed -e 's|^refs/heads/||'; }; f"
 
-	mb = merge-base HEAD master
+	mb = merge-base HEAD main
 	mbd = merge-base HEAD develop
 
 	cp = cherry-pick
@@ -98,11 +98,11 @@
 	# Resets code, but commits to unreachable branch. In case of emergency, `git reflog` and look for “WIPE SAVEPOINT” commit
 	wipe = !git add -A && git commit -qm 'WIPE SAVEPOINT' && git reset HEAD~1 --hard
 
-	# Cleans up merged branches. Meant to be run from `master` or `develop`. Optional parameter is branch name (defaults to `master`).
-	bclean = "!f() { git checkout ${1-master} && git branch --merged ${1-master} | grep -v " ${1-master}$" | xargs git branch -d; }; f"
+	# Cleans up merged branches. Meant to be run from `main` or `develop`. Optional parameter is branch name (defaults to `main`).
+	bclean = "!f() { git checkout ${1-main} && git branch --merged ${1-main} | grep -v " ${1-main}$" | xargs git branch -d; }; f"
 
-	# Checks out branch (`master`, if left unspecified), updates it, then cleans up merged branches.
-	bdone = "!f() { git checkout ${1-master} && git up && git bclean ${1-master}; }; f"
+	# Checks out branch (`main`, if left unspecified), updates it, then cleans up merged branches.
+	bdone = "!f() { git checkout ${1-main} && git up && git bclean ${1-main}; }; f"
 
 	# Checkout a branch name recursively in all submodules.
 	# If a submodules doesn’t have a branch with that name, that’s fine. It’ll just stay on the commit (detached).
@@ -116,7 +116,7 @@
 
 	# Forcefully perform a git command in the current repo and recursively in all submodules (regardless of exit status).
 	# NOTE: The remainder of the git command (after `git r`) must be in quotes
-	# Example: git r "checkout master"
+	# Example: git r "checkout main"
 	r = !sh -c '\
 		git $@ && \
 		git submodule foreach --recursive \"git $@ || :\" && \
