@@ -1,10 +1,4 @@
 # This file goes in your home directory and is run every time LLDB starts.
-# Importing the script below will make the 'ql' and 'qlf' available to you in LLDB.
-# IMPORTANT: Update the path to the script depending on where you decide place it.
-
-command script import ~/Library/lldbScripts/lldb_quick_look.py
-command alias ql quicklook
-command script import ~/Developer/chisel/fblldb.py
 
 # Get a recursive description of the view hierarchy starting from the app’s key window.
 command regex rd 's/^[[:space:]]*$/po [[[UIApplication sharedApplication] keyWindow] recursiveDescription]/' 's/^(.+)$/po [%1 recursiveDescription]/'
